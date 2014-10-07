@@ -91,13 +91,33 @@ class TruthTable:
             output_file.write("\n")
             for output in self.outputs.keys():
                 output_file.write("\t\t" + "assert " + output + " = " + "'" + str(int(self.outputs[output][i])) + "' ")
-                output_file.write("report \"Failed test " + str(i + 1) + "\"" + ";" + "\n")
+                output_file.write("report \"Failed test " + str(i + 1) + " for variable: " + output + "\"" + ";" + "\n")
             output_file.write("\n")
 
+    @staticmethod
+    def get_user_input():
+        print "Enter --end to stop"
+        value_list = []
+        is_valid = True
+        while is_valid:
+            new_input = raw_input()
+            if new_input == "--end":
+                is_valid = False
+            else:
+                value_list.append(str(new_input))
+        print "\n"
+        return value_list
 
 if __name__ == "__main__":
-    inputs = ['A', 'B', 'C']
-    outputs = ['Sum']
+    inputs = []
+    outputs = []
+
+    print "Enter the names of input variables:"
+    inputs = TruthTable.get_user_input() 
+
+    print "Enter the names of the output variabes:"
+    outputs = TruthTable.get_user_input()
+
     truth_table = TruthTable(inputs, outputs)
     truth_table.fill_outputs()
     truth_table.display()

@@ -41,6 +41,14 @@ class TruthTable:
             sys.stdout.write("%-*s" % (longest_key_len, title) + " ")
         for title in outputs:
             sys.stdout.write("%-*s" % (longest_key_len, title) + " ")
+       
+        sys.stdout.write("\n")
+
+        for i in range(len(inputs + outputs)):
+            for j in range(0, longest_key_len):
+                sys.stdout.write("-")
+            sys.stdout.write(" ")
+
         sys.stdout.write("\n")
 
         combined_inputs_outputs = (inputs + outputs)
@@ -75,6 +83,7 @@ class TruthTable:
                         is_valid = True
                     else:
                         print "Invalid input, must be: true, false, 1, or 0"
+        sys.stdout.write("\n")
                     
             
             
@@ -109,17 +118,18 @@ class TruthTable:
                 is_valid = False
             else:
                 value_list.append(str(new_input))
-        print "\n"
-        return value_list
+        sys.stdout.write("\n")
+        return value_list        
 
 if __name__ == "__main__":
     inputs = []
     outputs = []
 
-    print "Enter the names of input variables:"
+    sys.stdout.write("\n")
+    sys.stdout.write("Enter the names of input variables:\n")
     inputs = TruthTable.get_user_input() 
 
-    print "Enter the names of the output variabes:"
+    sys.stdout.write("Enter the names of the output variabes:\n")
     outputs = TruthTable.get_user_input()
 
     truth_table = TruthTable(inputs, outputs)

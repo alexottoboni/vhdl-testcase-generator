@@ -80,6 +80,8 @@ class TruthTable:
             
     def output_vhdl(self):
         output_file = open("./output.vhd", 'w')
+        output_file.write("\tstim_proc: process\n")
+        output_file.write("\tbegin")
         output_file.write("\n")
         num_inputs = self.get_num_inputs()
         for i in range(0, pow(2, num_inputs)):
@@ -93,6 +95,8 @@ class TruthTable:
                 output_file.write("\t\t" + "assert " + output + " = " + "'" + str(int(self.outputs[output][i])) + "' ")
                 output_file.write("report \"Failed test " + str(i + 1) + " for variable: " + output + "\"" + ";" + "\n")
             output_file.write("\n")
+        output_file.write("\t\twait;\n")
+        output_file.write("\tend process;\n")
 
     @staticmethod
     def get_user_input():
